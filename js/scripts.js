@@ -4,16 +4,27 @@ let pokemonList = [
    {name: "Wigglytuff", height: 60, type: ["steel","poison"]}
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {
-   document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
-   if (pokemonList[i].height > 55) {
+let pokemonList2 = [
+   {name: "Alcremie", height: 50, type: ["fairy","magical"]},
+   {name: "Altaria", height: 70, type: ["dragon","flying"]},
+   {name: "Azurill", height: 25, type: ["water","magical"]}
+];
+
+function printArrayDetails(list){
+    list.forEach(function(pokemon) {
+    document.write(pokemon.name + " (height: " + pokemon.height + ")");
+    if (pokemon.height > 55) {
       document.write(" - Wow, that's big!");
   }
-   else if (pokemonList[i].height > 30 && pokemonList[i].height <= 50) {
-   document.write(" - Amazing height!");
+    else if (pokemon.height > 30 && pokemon.height <= 50) {
+      document.write(" - Amazing height!");
   }
-   else {
-   document.write(" - You're so cute!");
+    else {
+      document.write(" - You're so cute!");
   }
-   document.write("<br>");
+      document.write("<br>");
+  });
 }
+
+printArrayDetails(pokemonList);
+printArrayDetails(pokemonList2);
