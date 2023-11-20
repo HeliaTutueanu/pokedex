@@ -1,44 +1,37 @@
-let pokemonRepository = (function () {
-  let pokemonList = [
-    {name: "Squirtle", height: 50, type: ["earth","cuteness"]},
-    {name: "Ivysaur", height: 30, type: ["water","scary"]},
-    {name: "Wigglytuff", height: 60, type: ["steel","poison"]}
-];
-
-function getAll() {
-  return pokemonList;
+function mergedPokemonRepository(mergedList) {
+  let pokemonList = mergedList || [];
+  function getAll() {
+    return pokemonList;
+  }
+  function add(pokemon) {
+    const expectedKeys = ['name', 'height', 'type'];
+    if (typeof pokemon === 'object' && expectedKeys.every(key => Object.keys(pokemon).includes(key))) {
+      pokemonList.push(pokemon);
+    } else {
+      console.error('Invalid Pokemon format. Please provide an object with keys: ' + expectedKeys.join(', '));
+    }
+  }
+  function findByName(name) {
+    return pokemonList.find(pokemon => pokemon.name.toLowerCase() === name.toLowerCase());
+  }
+  return {
+    getAll: getAll,
+    add: add,
+    findByName: findByName
+  };
 }
 
-function add(pokemon) {
-  pokemonList.push(pokemon);
-}
+let pokemonRepository = mergedPokemonRepository([
+  {name: "Squirtle", height: 50, type: ["earth","cuteness"]},
+  {name: "Ivysaur", height: 30, type: ["water","scary"]},
+  {name: "Wigglytuff", height: 60, type: ["steel","poison"]}
+]);
 
-return {
-  getAll: getAll,
-  add: add
-};
-})();
-
-let pokemonRepository2 = (function () {
-  let pokemonList2 = [
-    {name: "Alcremie", height: 50, type: ["fairy","magical"]},
-    {name: "Altaria", height: 70, type: ["dragon","flying"]},
-    {name: "Azurill", height: 25, type: ["water","magical"]}
-];
-
-function getAll() {
-  return pokemonList2;
-}
-
-function add(pokemon) {
-  pokemonList2.push(pokemon);
-}
-
-return {
-  getAll: getAll,
-  add: add
-};
-})();
+let pokemonRepository2 = mergedPokemonRepository([
+  {name: "Alcremie", height: 50, type: ["fairy","magical"]},
+  {name: "Altaria", height: 70, type: ["dragon","flying"]},
+  {name: "Azurill", height: 25, type: ["water","magical"]}
+]);
 
 let newPokemonRepository = pokemonRepository;
 let newPokemonRepository2 = pokemonRepository2;
