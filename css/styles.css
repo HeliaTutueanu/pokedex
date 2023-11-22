@@ -8,32 +8,95 @@ h1 {
     font-size: 30px;
     font-weight: bolder;
     color: black;
+    text-align: center;
   }
   
 h3 {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: #90a6e2;
+    text-align: center;
   }
 
+.pokemon-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+  
 
 .button-class {
-    background-color:rgb(224, 226, 226);
-    border: none;
-    color: white;
-    margin: 10px;
-    padding: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
     background-color: white;
     color: black;
     border: 2px solid rgb(224, 226, 226);
+    margin: 10px;
+    padding: 20px;
+    width: 350px;
+    height: 80px;
+    box-sizing: border-box;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
   }
-
+  
+#modal-container {
+    display: none;
+  }
+  
+#modal-container.is-visible {
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;   /* to show it above other content */
+    overflow: auto;   /* to allow scrolling if the screen is not high enough*/
+    display: grid;
+    text-align: center;
+  }
+  
+.modal {
+    margin: auto;
+    display: inline-block;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 15px;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.modal-close {
+    float: right;
+    appearance: none;
+    border: 0;
+    background: none;
+    color: #777;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 600px;
+  }
+  
+.modal h1 {
+    margin-top: 500;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+.modal p {
+    margin-bottom: 0;
+  }
