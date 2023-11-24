@@ -1,8 +1,12 @@
+
+// add search form
+// style modal more + responsive design
+
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  function add(pokemon) {
+  function add(pokemon) {   // adds a pokemon to the repository if it's a valid object
     if (
       typeof pokemon === "object" &&
       "name" in pokemon
@@ -17,7 +21,7 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  function addListItem(pokemon) {
+  function addListItem(pokemon) {   // adds a list item for a pokemon to the DOM
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
     let button = document.createElement("button");
@@ -45,7 +49,7 @@ let pokemonRepository = (function () {
     }
   }
 
-  function loadList() {
+  function loadList() {   // fetches the pokemon list from the API
     showLoadingMessage();
 
     return fetch(apiUrl).then(function (response) {
@@ -66,7 +70,7 @@ let pokemonRepository = (function () {
     })
   }
 
-  function loadDetails(item) {
+  function loadDetails(item) {   // any additional details for a pokemon
     showLoadingMessage();
     let url = item.detailsUrl;
 
@@ -83,7 +87,7 @@ let pokemonRepository = (function () {
     });
   }
 
-  function showDetails(item) {
+  function showDetails(item) {   // displays the details
     pokemonRepository.loadDetails(item).then(function () {
       let modalTitle = item.name;
       let modalContent = `<p><strong>Name:</strong> ${item.name}</p><p><strong>Height:</strong> ${item.height}</p><img src="${item.imageUrl}" alt="${item.name}">`;
@@ -145,7 +149,7 @@ function hideModal() {
   modalContainer.classList.remove('is-visible');
 }
 
-window.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (e) => {   // close  modal with escape
   let modalContainer = document.querySelector('#modal-container');
   if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
     hideModal();  
