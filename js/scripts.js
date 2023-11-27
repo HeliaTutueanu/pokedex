@@ -1,7 +1,3 @@
-
-// add search form
-// style modal more + responsive design
-
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
@@ -26,8 +22,14 @@ let pokemonRepository = (function () {
     let listpokemon = document.createElement("li");
     let button = document.createElement("button");
 
+    listpokemon.classList.add("list-group-item");   // adds list class to li items
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
+    button.classList.add("btn", "btn-primary", "btn-sm");   // adds Bootstrap button utility classes
+
+
+    button.setAttribute("data-bs-toggle", "modal");
+    button.setAttribute("data-bs-target", `#exampleModal${pokemonList.childElementCount + 1}`);   // unique modal ID
+
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
 
