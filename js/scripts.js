@@ -24,7 +24,7 @@ let pokemonRepository = (function () {
 
     listpokemon.classList.add("list-group-item");   // adds list class to li items
     button.innerText = pokemon.name;
-    button.classList.add("btn", "btn-primary", "btn-sm");   // adds Bootstrap button utility classes
+    button.classList.add("btn", "btn-primary", "btn-sm", "button-class");   // adds Bootstrap button utility classes
 
 
     button.setAttribute("data-bs-toggle", "modal");
@@ -120,7 +120,7 @@ function showModal(title, text) {
   let modal = document.createElement('div');
   modal.classList.add('modal');
 
-  let closeButtonElement = document.createElement('button');   // Add the new modal content
+  let closeButtonElement = document.createElement('button');   // add the new modal content
   closeButtonElement.classList.add('modal-close');
   closeButtonElement.innerText = 'Close';
   closeButtonElement.addEventListener('click', hideModal);
