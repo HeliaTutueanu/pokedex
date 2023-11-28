@@ -16,7 +16,7 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
-
+  
   function addListItem(pokemon) {   // adds a list item for a pokemon to the DOM
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
@@ -91,11 +91,13 @@ let pokemonRepository = (function () {
 
   function showDetails(item) {   // displays the details
     pokemonRepository.loadDetails(item).then(function () {
-      let modalTitle = item.name;
-      let modalContent = `<p><strong>Name:</strong> ${item.name}</p><p><strong>Height:</strong> ${item.height}</p><img src="${item.imageUrl}" alt="${item.name}">`;
-      showModal(modalTitle, modalContent);
+      let modalContent = $('<div class="pokemon-info"></div>');
+      modalContent.append(`<h2>${item.name}</h2><p><strong>Height:</strong> ${item.height}</p><img src="${item.imageUrl}" alt="${item.name}">`);
+  
+      showModal(item.name, modalContent);
     });
   }
+  
 
   return {
     add: add,
@@ -113,34 +115,54 @@ pokemonRepository.loadList().then(function () {
   });
 });
 
-function showModal(title, text) {
-  let modalContainer = document.querySelector('#modal-container');
-  modalContainer.innerHTML = '';   // clear all existing modal content
+document.getElementById('searchTerm').addEventListener('input', function () {
+  const searchTerm = this.value.toLowerCase();
+  searchPokemon(searchTerm);
+});
 
-  let modal = document.createElement('div');
-  modal.classList.add('modal');
+function searchPokemon(searchTerm) {   // function to search and filter Pokemon based on the entered term
+  const filteredPokemon = pokemonRepository.getAll().filter(function (pokemon) {
+    return pokemon.name.toLowerCase().includes(searchTerm);
+  });
 
-  let closeButtonElement = document.createElement('button');   // add the new modal content
-  closeButtonElement.classList.add('modal-close');
-  closeButtonElement.innerText = 'Close';
-  closeButtonElement.addEventListener('click', hideModal);
+  clearPokemonList();   // Clear existing Pokemon list
 
-  let titleElement = document.createElement('h1');
-  titleElement.innerText = title;
+  filteredPokemon.forEach(function (pokemon) {   // display the filtered Pokemon
+    pokemonRepository.addListItem(pokemon);
+  });
+}
 
-  let contentElement = document.createElement('div');
-  contentElement.insertAdjacentHTML('beforeend', text);
+function clearPokemonList() {   // function to clear the Pokemon list
+  const pokemonList = document.querySelector('.pokemon-list');
+  pokemonList.innerHTML = '';    // remove all child elements
+}
 
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(contentElement);
-  modalContainer.appendChild(modal);
+document.getElementById('clearSearch').addEventListener('click', function () {   // event listener for the "X" button inside the search bar to clear its content
+  document.getElementById('searchTerm').value = '';
+  searchPokemon('');   // trigger the search function to update the Pokemon list
+});
 
-  modalContainer.classList.add('is-visible');
+function showModal(title, content) {
+  let modalContainer = $('#modal-container');
+  modalContainer.empty();   // clear all existing modal content
 
-  modalContainer.addEventListener('click', (e) => {   // this is also triggered when clicking inside the modal - now, will only close if the user clicks directly on the overlay
-    let target = e.target;
-    if (target === modalContainer) {
+  let modal = $('<div class="modal"></div>');
+
+  let closeButtonElement = $('<button class="modal-close">Close</button>');   // add the new modal content
+  closeButtonElement.on('click', hideModal);
+
+  let contentElement = $('<div></div>').append(content);   // append the content div to the modal
+  
+  modal.append(contentElement);
+  modal.append(closeButtonElement);
+
+
+  modalContainer.append(modal);
+  modalContainer.addClass('is-visible');
+
+  modalContainer.on('click', (e) => {   // this is also triggered when clicking inside the modal - now, will only close if the user clicks directly on the overlay
+    let target = $(e.target);
+    if (target.is(modalContainer)) {
       hideModal();
     }
   });
