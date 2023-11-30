@@ -45,6 +45,15 @@ h2 {
     cursor: pointer;
     font-weight: bolder;
     color:#777;
+    background: #ddd;
+    border: 1px #ddd solid;
+    width: 30px;
+  }
+
+.btn-clear:hover {
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.9;
   }
 
 #nav-search {
@@ -118,7 +127,7 @@ h2 {
   }
   
 .modal {
-    margin: auto;
+    margin: auto 600px;
     display: inline-block;
     box-sizing: border-box;
     background: rgb(255, 255, 255);
