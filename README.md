@@ -1,7 +1,18 @@
-POKEDEX is an AI-powered web app that displays pokemon types, names and their height together with a picture.
+# Pokedex - JavaScript App
 
-How to get the project running: Open the web app, click on any pokemon name and view the information available.
+## Project description
+A small web application with HTML, CSS, and JavaScript that loads data about pokemons from an external API and enables the viewing of data points in detail. 
 
-Project dependencies: JavaScript ES14, ESLint rules, jquery-3.7.1.min, Bootstrap
+## Project dependencies 
+Bootstrap, jQuery
 
-Which API the project uses: Pokemon API
+## The API the project uses
+https://pokeapi.co/
+
+## Link to app
+Hosted on GitHub: https://github.com/HeliaTutueanu/pokedex
+
+## Set up this App
+* Clone this repository.
+* Navigate to the simple-js-app folder and run `npm install`
+* Open index.html inside your web browser.
